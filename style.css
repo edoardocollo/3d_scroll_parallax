@@ -13,7 +13,7 @@ html, body {
    position: sticky;
    top:0;
 }
-#slide {
+#scroll {
   position: absolute;
   top: 0;
   height: 300vh;

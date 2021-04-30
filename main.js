@@ -153,3 +153,132 @@ scene.add(cardGroup);
 }
 
 main();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function riot_main() {
+  // seleziono canvas
+  const canvas = document.querySelector('#riot');
+  // attribuisco renderer a canvas
+  const renderer = new THREE.WebGLRenderer({canvas});
+  // creo camera
+  const fov = 75;
+  const aspect = 2;  // the canvas default
+  const near = 0.1;
+  const far = 100;
+  const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+  // orbit control
+  const controls = new OrbitControls( camera, renderer.domElement );
+  camera.position.z = 0;
+  camera.position.y = 3;
+  controls.update();
+  // creo scena
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color( 0xffffff );
+  // creo geometria cubo
+  const boxWidth = 1;
+  const boxHeight = 1;
+  const boxDepth = 1;
+  const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
+  // creo materiale
+  const material = new THREE.MeshPhongMaterial({color: 0x44aa88});  // greenish blue
+  // creo mash
+  const cube = new THREE.Mesh(geometry, material);
+  // aggiungo cubo alla scena
+  scene.add(cube);
+
+  const bgRiotGeometry = new THREE.BoxGeometry(19.2,0.1,10.8);
+  const materialTest = new THREE.MeshPhongMaterial({color: 0x44bb88});  // greenish blue
+
+  const bgRiot = new THREE.Mesh(bgRiotGeometry,materialTest);
+  scene.add(bgRiot);
+  bgRiot.position.y = -4;
+
+
+  // aggiungo luce direzionale
+  {
+    const color = 0xFFFFFF;
+    const intensity = 1;
+    const light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(-1, 2, 4);
+    scene.add(light);
+  }
+  // resize pixel function
+  function resizeRendererToDisplaySize(renderer) {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const needResize = canvas.width !== width || canvas.height !== height;
+    if (needResize) {
+      renderer.setSize(width, height, false);
+    }
+    return needResize;
+  }
+
+
+  // funzione renderizzazione animazione
+  function render(time) {
+    time *= 0.001;  // convert time to seconds
+    // responsive
+    if (resizeRendererToDisplaySize(renderer)) {
+      const canvas = renderer.domElement;
+      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      camera.updateProjectionMatrix();
+    }
+
+
+    cube.rotation.x = time;
+    cube.rotation.y = time;
+    renderer.render(scene, camera);
+
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+}
+
+riot_main();
