@@ -2,16 +2,24 @@ html, body {
    margin: 0;
    height: 100%;
 }
+#section1 {
+  position: relative;
+  height: 300vh;
+  border:5px solid black;
+}
 #c {
    width: 100%;
-   height: 100%;
    display: block;
-   position: fixed;
+   position: sticky;
    top:0;
 }
 #slide {
   position: absolute;
   top: 0;
-  height: 500vh;
+  height: 300vh;
   width: 100vw;
+}
+#section2 {
+  height: 200vh;
+  background-color: red;
 }

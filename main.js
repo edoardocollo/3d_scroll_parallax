@@ -21,7 +21,7 @@ function main() {
   controls.update();
   // creo scena
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color( 0xf0f0f0 );
+  scene.background = new THREE.Color( 0xffffff );
   // creo geometria cubo
   const boxWidth = 1;
   const boxHeight = 1;
